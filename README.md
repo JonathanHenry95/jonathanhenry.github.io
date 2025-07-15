@@ -1,3 +1,3 @@
-# Data Portfolio
+# Jonathan Henry
 
 Welcome to my Portfolio !
