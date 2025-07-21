@@ -117,12 +117,12 @@ Le jeu de données propre doit respecter :
 
 Schéma attendu :
 
-| Colonne            | Type      | Obligatoire |
-|--------------------|-----------|-------------|
-| channel_name       | texte     | oui         |
-| total_subscribers  | entier    | oui         |
-| total_views        | entier    | oui         |
-| total_videos       | entier    | oui         |
+| Colonne            | Type       | Obligatoire |
+|--------------------|------------|-------------|
+| channel_name       | VARCHAR    | oui         |
+| total_subscribers  | INTEGER    | oui         |
+| total_views        | INTEGER    | oui         |
+| total_videos       | INTEGER    | oui         |
 
 **Exemple SQL pour transformer :**
 ```
