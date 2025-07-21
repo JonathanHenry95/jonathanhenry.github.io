@@ -1,4 +1,4 @@
-# Portefeuille de Données : Excel vers Power BI
+# Data Portfolio : Excel vers Power BI
 
 ![Diagramme animé Excel vers Power BI](assets/images/kaggle_to_powerbi.gif)
 
