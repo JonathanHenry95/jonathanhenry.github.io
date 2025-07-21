@@ -1,158 +1,219 @@
-# Jonathan Henry
+# Portefeuille de Données : Excel vers Power BI
 
-Welcome to my Portfolio !
+![Diagramme animé Excel vers Power BI](assets/images/kaggle_to_powerbi.gif)
 
-# Table of contents 
+Ce projet présente la construction d’un tableau de bord Power BI à partir de données Excel sur les principaux créateurs YouTube du Royaume-Uni en 2024, afin d’orienter une stratégie marketing efficace.
 
-- [Objective](#objective)
-- [Data Source](#data-source)
-- [Étapes](#Étapes)
-- [Design](#design)
-  - [Mockup](#mockup)
-  - [Tools](#tools)
-- [development](#development)
+---
+
+## Sommaire
+
+- [Objectif](#objectif)
+- [Source des données](#source-des-données)
+- [Étapes du projet](#étapes-du-projet)
+- [Conception](#conception)
+  - [Maquette](#maquette)
+  - [Outils utilisés](#outils-utilisés)
+- [Développement](#développement)
   - [Pseudocode](#pseudocode)
-  - [Data Exploration](#data-exploration)
-  - [Data Cleaning](#data-cleaning)
-  - [Transform the Data](#transform-the-data)
-  - [Create the SQL View](#create-the-sql-view)
-- [Testing](#testing)
-  - [Data Quality Tests](#data-quality-tests)
-- [Visualization](#visualization)
-  - [Results](#results)
-  - [DAX Measures](#dax-measures)
-- [Analysis](#analysis)
-  - [Findings](#findings)
-  - [Validation](#validation)
-  - [Discovery](#discovery)
-- [Recommendations](#recommendations)
-  - [Potential ROI](#potential-roi)
-  - [Potential Courses of Actions](#potential-courses-of-actions)
+  - [Exploration des données](#exploration-des-données)
+  - [Nettoyage des données](#nettoyage-des-données)
+  - [Transformation](#transformation)
+  - [Création de la vue SQL](#création-de-la-vue-sql)
+- [Tests](#tests)
+- [Visualisation](#visualisation)
+  - [Résultats du dashboard](#résultats-du-dashboard)
+  - [Mesures DAX](#mesures-dax)
+- [Analyse](#analyse)
+- [Recommandations](#recommandations)
 - [Conclusion](#conclusion)
 
+---
 
+## Objectif
 
-# Objective 
-
-- Quelle est la problématique ?
-
-Le responsable du marketing veut savoir qui sont les meilleurs YouTubers anglais en 2024 pour décider quels YouTubers seraient les mieux placés pour mener des campagnes de marketing pendant le reste de l'année.
-
-- Quelle est la solution idéale ?
-
-Créer un tableau de bord qui fournit des informations sur les meilleurs YouTubers britanniques en 2024, notamment sur leur
-- nombre d'abonnés
+Le but est d’aider une équipe marketing à choisir les meilleurs créateurs YouTube UK avec lesquels collaborer en 2024, grâce à un tableau de bord interactif regroupant :
+- le nombre d’abonnés
 - le nombre total de vues
-- le nombre total de vidéos
-- l'engagement rate
+- le nombre de vidéos publiées
+- des métriques d’engagement
 
-Cela aidera l'équipe marketing à prendre des décisions éclairées sur les YouTubers avec lesquels collaborer pour leurs campagnes marketing.
+### Cas utilisateur
 
-## User Story
+En tant que responsable marketing, ce dashboard me permet d’identifier rapidement les chaînes les plus performantes pour maximiser la visibilité et l’impact des campagnes.
 
-En tant que responsable marketing, je souhaite utiliser un dashboard qui analyse les données des chaînes YouTube au Royaume-Uni.
+---
 
-Ce tableau de bord doit me permettre d'identifier les chaînes les plus performantes en fonction de paramètres tels que le nombre d'abonnés et le nombre moyen de vues.
+## Source des données
 
-Grâce à ces informations, je peux prendre des décisions plus éclairées sur les Youtubers avec lesquels il convient de collaborer, et donc maximiser l'efficacité de chaque campagne de marketing.
+- Jeu de données issu d’un fichier Excel disponible sur Kaggle (Top 100 Influenceurs UK 2024).
+- Les colonnes utilisées : channel_name, total_subscribers, total_views, total_videos.
 
-# Data source 
+---
 
-- Quelles sont les données nécessaires pour atteindre notre objectif ?
+## Étapes du projet
 
-Nous avons besoin de données sur les principaux YouTubers britanniques en 2024, y compris leurs
-- noms des chaînes
-- le nombre total d'abonnés
-- le nombre total de vues
-- le nombre total de vidéos téléchargées
+- Conception du tableau de bord
+- Préparation et nettoyage de la donnée
+- Contrôles qualité et validation
+- Visualisation sous Power BI
+- Analyse et recommandations
 
+---
 
-- D'où proviennent les données ? 
-Les données proviennent de Kaggle (un extrait Excel), [voir ici pour le trouver] (https://www.kaggle.com/datasets/bhavyadhingra00020/top-100-social-media-influencers-2024-countrywise?resource=download).
+## Conception
 
-# Étapes
+### Questions posées par le dashboard
 
-- Conception
-- Développement
-- Test
-- Analyse
+- Qui sont les 10 chaînes avec le plus d’abonnés ?
+- Quelles chaînes ont publié le plus grand nombre de vidéos ?
+- Quelles sont les chaînes avec le plus de vues accumulées ?
+- Quels sont les meilleurs ratios vus/vidéo, vus/abonné et taux d’engagement ?
 
-# Design 
+### Maquette
 
-## Composants du dashboard
+- Tableaux de classement
+- Treemap
+- Indicateurs clé
+- Graphique à barres horizontal
 
-- Que doit contenir le tableau de bord sur la base des exigences fournies ?
+![Maquette du dashboard](assets/images/dashboard_mockup.png)
 
-Pour comprendre ce qu'il doit contenir, nous devons déterminer les questions auxquelles le tableau de bord doit répondre :
+### Outils utilisés
 
-1. Qui sont les 10 premiers YouTubers ayant le plus d'abonnés ?
-2. Quelles sont les 3 chaînes qui ont upload le plus de vidéos ?
-3. Quelles sont les 3 chaînes qui ont le plus de vues ?
-4. Quelles sont les 3 chaînes qui ont la moyenne de vues la plus élevée par vidéo ?
-5. Quelles sont les 3 chaînes qui ont le plus grand nombre de vues par abonné ?
-6. Quelles sont les 3 chaînes qui ont le taux d'engagement des abonnés le plus élevé par vidéo téléchargée ?
+| Outil      | Utilisation principale                |
+|------------|--------------------------------------|
+| Excel      | Exploration et prétraitement         |
+| SQL Server | Nettoyage, tests, préparation        |
+| Power BI   | Visualisation et analyse             |
+| GitHub     | Suivi version et documentation       |
+| Mokkup AI  | Création rapide de maquette          |
 
-Pour l'instant, il s'agit de quelques-unes des questions auxquelles nous devons répondre, mais cela peut changer au fur et à mesure que nous avançons dans notre analyse.
+---
 
-## Dashboard mockup
+## Développement
 
-- À quoi doit-il ressembler ?
+### Pseudocode
 
-Voici quelques-unes des données visuelles qui peuvent être utiles pour répondre à nos questions :
+1. Importer les données sources
+2. Explorer rapidement sous Excel
+3. Charger dans SQL Server et nettoyer
+4. Vérifier la qualité des données (lignes, colonnes, doublons…)
+5. Créer la vue pour l’analyse
+6. Réaliser les visualisations dans Power BI
+7. Documenter et publier sur GitHub
 
-1. Tableau
-2. Treemap
-3. Tableau de bord
-4. Diagramme à barres horizontal
+### Exploration des données
 
+- Vérification : colonnes disponibles, présence d’erreurs ou d’incohérences, doublons, noms de colonnes à harmoniser.
+- Extraction du nom réel de la chaîne à partir de l’identifiant présent avec «@».
 
-![Maquette du tableau de bord](assets/images/dashboard_mockup.png)
+### Nettoyage des données
 
-## Tools 
+Le jeu de données propre doit respecter :
+- Garder uniquement channel_name, total_subscribers, total_views, total_videos
+- Types adaptés (texte, entier)
+- Aucune valeur manquante
 
+Schéma attendu :
 
-| Tool | Purpose |
-| --- | --- |
-| Excel | Exploration des données |
-| SQL Server | Nettoyage, test et analyse des données |
-| Power BI | Visualisation des données via des dashboards interactifs |
-| GitHub | Hébergement de la documentation du projet |
-| Mokkup AI | Conception de la maquette du dashboard |
+| Colonne            | Type      | Obligatoire |
+|--------------------|-----------|-------------|
+| channel_name       | texte     | oui         |
+| total_subscribers  | entier    | oui         |
+| total_views        | entier    | oui         |
+| total_videos       | entier    | oui         |
 
+**Exemple SQL pour transformer :**
+```
+SELECT
+    SUBSTRING(NOMBRE, 1, CHARINDEX('@', NOMBRE) -1) AS channel_name,
+    total_subscribers,
+    total_views,
+    total_videos
+FROM
+    top_uk_youtubers_2024
+```
 
-# Développement
+**Création de la vue :**
+```
+CREATE VIEW view_uk_youtubers_2024 AS
+SELECT
+    CAST(SUBSTRING(NOMBRE, 1, CHARINDEX('@', NOMBRE) -1) AS VARCHAR(100)) AS channel_name,
+    total_subscribers,
+    total_views,
+    total_videos
+FROM
+    top_uk_youtubers_2024
+```
 
-## Pseudocode
+---
 
-- Quelle est l'approche générale pour créer cette solution ?
+## Tests
 
-1. Obtenir les données
-2. Explorer les données dans Excel
-3. Charger les données dans le serveur SQL
-4. Nettoyer les données avec SQL
-5. Tester les données avec SQL
-6. Visualiser les données dans Power BI
-7. Générer des conclusions sur la base des informations recueillies
-8. Rédiger la documentation et les commentaires
-9. Publier les données sur GitHub
+Contrôles mis en place :
+- Correspondance du nombre de lignes attendu
+- Présence/absence de colonnes superflues
+- Adaptation des types
+- Absence de doublons
 
-## Notes sur l'exploration des données
+---
 
-Il s'agit de l'étape au cours de laquelle vous examinez les données, les erreurs, les incohérences, les bogues, les caractères étranges et corrompus, etc.
+## Visualisation
 
+### Résultats du dashboard
 
-- Quelles sont vos premières observations sur cet ensemble de données ? Qu'est-ce qui a attiré votre attention jusqu'à présent ?
+![Aperçu dashboard Power BI](assets/images/top_uk_youtubers_2024.gif)
 
-1. Il y a au moins 4 colonnes qui contiennent les données dont nous avons besoin pour cette analyse, ce qui indique que nous avons tout ce dont nous avons besoin dans le fichier sans avoir à contacter le client pour obtenir d'autres données.
-2. La première colonne contient l'ID du canal et ce qui semble être l'IDS du canal, séparés par un symbole @ - nous devons en extraire les noms des canaux.
-3. Certaines cellules et certains noms d'en-tête sont rédigés dans une langue différente - nous devons confirmer si ces colonnes sont nécessaires et, si c'est le cas, nous devons les traiter.
-4. Nous avons plus de données que nous n'en avons besoin, donc certaines de ces colonnes doivent être supprimées.
+Classement des chaînes YouTube selon l’indicateur choisi avec filtres et graphiques dynamiques.
 
+### Exemples de mesures DAX
 
+```
+-- Abonnés (en millions)
+Total Subscribers (M) = DIVIDE(SUM(view_uk_youtubers_2024[total_subscribers]), 1000000)
 
+-- Vues (en milliards)
+Total Views (B) = ROUND(SUM(view_uk_youtubers_2024[total_views]) / 1000000000, 2)
 
+-- Moyenne de vues par vidéo (en millions)
+Average Views per Video (M) =
+VAR sumViews = SUM(view_uk_youtubers_2024[total_views])
+VAR sumVideos = SUM(view_uk_youtubers_2024[total_videos])
+RETURN DIVIDE(sumViews, sumVideos, BLANK()) / 1000000
+```
 
+---
 
+## Analyse
 
+- Classement des chaînes par : abonnés, nombre de vidéos, total de vues, moyennes, ratios.
+- Calculs simples pour estimer la rentabilité potentielle en fonction de différents scénarios de campagnes (exemple : diffusion de produit, contrat d’influence, mini-série sponsorisée).
 
+---
 
+## Recommandations
+
+- Priorité à une collaboration avec **Dan Rhodes** pour la visibilité maximale.
+- Les chaînes ultra-productives (comme GRM Daily, Manchester City, Yogscast) sont à retenir si le budget le permet, mais leur taux de rentabilité est parfois inférieur.
+- Penser aussi à **NoCopyrightSounds** et **DanTDM** pour leur potentiel d’engagement et leur forte communauté.
+- Suivre et évaluer en continu la rentabilité réelle selon les performances.
+
+### Exemples de ROI calculés
+
+- **Dan Rhodes** : +1 065 000 $ / vidéo en bénéfice potentiel
+- **Mister Max** : +1 276 000 $ / campagne influenceur
+- **NoCopyrightSounds** : +642 000 $ / vidéo
+
+### Plan d’action
+
+1. Contacter en premier Dan Rhodes
+2. Adapter la négociation au budget et aux KPIs de chaque action
+3. Lancer les campagnes et suivre les résultats
+4. Affiner la stratégie en s’appuyant sur la donnée et le feedback
+
+---
+
+## Conclusion
+
+Ce projet montre comment exploiter simplement des données publiques pour sélectionner objectivement les meilleurs influenceurs vidéo d’un marché, et maximiser l’efficacité des campagnes marketing grâce à la donnée et à la visualisation.
