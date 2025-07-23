@@ -10,7 +10,7 @@
 
 - [Objectif](#objectif)
 - [Data Source](#data-source)
-- [Étape](#étape)
+- [Étapes](#étapes)
 - [Design](#design)
   - [Mockup](#mockup)
   - [Outils utilisés](#outils-utilisés)
