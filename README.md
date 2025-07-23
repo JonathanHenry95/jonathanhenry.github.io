@@ -1,4 +1,4 @@
-# Data Portfolio: Excel to Power BI 
+# Data Portfolio: Top 10 Excel to Power BI 
 
 
 ![excel-to-powerbi-animated-diagram](assets/images/kaggle_to_powerbi.gif)
@@ -10,7 +10,7 @@
 
 - [Objectif](#objectif)
 - [Data Source](#data-source)
-- [Étape](#étages)
+- [Étape](#étape)
 - [Design](#design)
   - [Mockup](#mockup)
   - [Outils utilisés](#outils-utilisés)
@@ -32,7 +32,6 @@
 - [Recommendations](#recommendations)
   - [Potential ROI](#potential-roi)
   - [Mesures envisageables](#mesures-envisageables)
-- [Conclusion](#conclusion)
 
 
 
